@@ -15,6 +15,8 @@ public class GameDriver {
 		// 2. create a player object
 		// 3. the dealer need to deal a player a hand (cardDeal Method)
 		// 4. the
+		
+		//test
 
 		// TODO need to ask the user how many players there are
 		// for loop to go through and do this -->
