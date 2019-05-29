@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 public class GameManager {
 
+	//
+	public static boolean gameEnd = false;
+	
 	// keep track of dealer index
 	public static int dealerTrackerIndex = 0;
 	public static boolean allPlayersBusted = false;
@@ -83,6 +86,12 @@ public class GameManager {
 
 	public void playerSetCardHand() {
 
+		// card deck??
+		CardDeck cardDeck = new CardDeck();
+		
+		
+		
+		
 		// TODO TURN NUMBER IS LESS THAN 1
 
 		// need to do this until every player has two cards run through this size * 2
@@ -425,82 +434,18 @@ public class GameManager {
 					}
 				}
 			}
-			// game over
-			// TODO CALL GAME END METHOD HERE!!! DISPLAY POINTS AND ASK IF WANT TO PLAY
-			// AGAIN
-			System.out.println("--need to call game end method here---");
-			endGameSequence();
+			
+			
 
 		}
-
-//		
-//		//if all players busted.............. call points adder
-//		if (allPlayersBusted) {
-//			System.out.println("all players busted");
-//			System.out.println("--calling points adder--");
-//			pointsAdder();
-//		} else if (listOfPlayers.get(dealerTrackerIndex).getCardHandTotal() == 21) {
-//			// if dealer gets 21 everyone loses except for people who tied the dealer
-//			System.out.println("Dealer has 21!!!!!!");
-//			for (int i = 0; i < listOfPlayers.size() - 1; i++) {
-//				if (listOfPlayers.get(i).getCardHandTotal() == listOfPlayers.get(dealerTrackerIndex).getCardHandTotal()) {
-//					listOfPlayers.get(i).tie = true;
-//					System.out.println("tie - if dealer gets 21 everyone loses except for people who tied the dealer");
-//					System.out.println("Player " + (i+1) + " tied!");
-//					// GAME IS OVER
-//					System.out.println("--calling points adder--");
-//					pointsAdder();
-//				} // else if (listOfPlayers.get(j).getCardHandTotal() <
-//					// listOfPlayers.get(dealerTrackerIndex).getCardHandTotal()) {
-//					// listOfP
-//					// }
-//					// dont need cause win is already false!
-//			}
-//
-//		} else if (listOfPlayers.get(dealerTrackerIndex).isBust()) {
-//			// if dealer busted!
-//			// players who didnt bust win!
-//			System.out.println("dealer busted!!!!!!");
-//			for (int i = 0; i < listOfPlayers.size() - 1; i++) {
-//				if (listOfPlayers.get(i).isBust() == false) {
-//					listOfPlayers.get(i).win = true;
-//					System.out.println("Players who didnt bust win!!!!!");
-//					System.out.println("Player " + (i+1) + " won!");
-//					// dont need to add this all at once!!!!!!!!!!!!!
-//					// called for every player
-//					System.out.println("--calling points adder--");
-//					// game over!
-//					pointsAdder();
-//				}
-//
-//			}
-//		} else if (!listOfPlayers.get(dealerTrackerIndex).isBust()) {
-//			// if dealer didnt bust see if the players win or not
-//			System.out.println("dealer DID NOT bust!!!");
-//			for (int i = 0; i < listOfPlayers.size() - 1; i++) {
-//
-//				if (listOfPlayers.get(i).isBust() == false) {
-//					System.out.println("player didnt bust!");
-//					if (listOfPlayers.get(i).getCardHandTotal() > listOfPlayers.get(dealerTrackerIndex)
-//							.getCardHandTotal()) {
-//						// then player wins! woo!
-//						listOfPlayers.get(i).win = true;
-//						System.out.println("Player " + i + " won!");
-//					} else if (listOfPlayers.get(i).getCardHandTotal() == listOfPlayers.get(dealerTrackerIndex)
-//							.getCardHandTotal()) {
-//						listOfPlayers.get(i).tie = true;
-//						System.out.println("Player " + (i+1) + " tied!");
-//					} else {
-//						System.out.println("Player " + (i+1) + " lost!");
-//					}
-//
-//					
-//				}
-//			}
-//		}
+		
 		// game over
-		// System.out.println("Calling points adder at end of calculate game!!!!");
-		// pointsAdder();
+		// TODO CALL GAME END METHOD HERE!!! DISPLAY POINTS AND ASK IF WANT TO PLAY
+		// AGAIN
+
+		System.out.println("--need to call game end method here---");
+		endGameSequence();
+
 
 	}
 
@@ -582,14 +527,16 @@ public class GameManager {
 
 	// TODO END GAME
 	// return boolean
-	public boolean endGameSequence() {
+	public void endGameSequence() {
 		System.out.println("--in endGameSequence method --");
 		// display everyones points
 		// if they play wants to play again then return true
 		// the they dont want to play again
 		//
 		// display points
-		boolean gameEnd = false;
+		
+		//restart
+		gameEnd = false;
 		
 		
 		pointsDisplayer();
@@ -608,10 +555,12 @@ public class GameManager {
 			
 			if (input.equals("y") || input.equals("Y")) {
 				validInput = false;
-				gameEnd = true;
+				gameEnd = false;
+				System.out.println("--calling game reset method--");
+				gameReset();
 			} else if(input.equals("n") || input.equals("N")){
 				validInput = false;
-				gameEnd = false;
+				gameEnd = true;
 			}
 		} while (validInput);
 		
@@ -626,7 +575,7 @@ public class GameManager {
 //		}
 		
 		
-		return gameEnd;
+		//return gameEnd;
 		
 		
 		
@@ -636,6 +585,15 @@ public class GameManager {
 
 	}
 
+	
+	//TODO
+	public void gameReset() {
+		System.out.println("--in gameReset method--");
+		//reset game but dont reset player score!
+		//loop through the players and remove all cards and put them back into the deck?
+		//
+	}
+	
 	// displays all points
 	public void pointsDisplayer() {
 		System.out.println("--in pointsDisplayer Method--");

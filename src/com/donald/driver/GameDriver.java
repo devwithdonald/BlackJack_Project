@@ -26,7 +26,7 @@ public class GameDriver {
 		//Player player = new Player();
 
 		// create this once need it
-		CardDeck cardDeck = new CardDeck();
+
 
 		// print out the card deck
 		//System.out.println("Card Deck List->" + Arrays.toString(CardDeck.deck.toArray()));
@@ -85,6 +85,9 @@ public class GameDriver {
 		
 		//while (true) play {gamemanger needs static method and needs to check at end// return?}
 		
+		
+		//TODO cardDeck -> called inside set card hand (need to reset)
+		//CardDeck cardDeck = new CardDeck();
 		//TODO GAME MANAGER
 		GameManager gameManager = new GameManager();
 		
@@ -92,8 +95,9 @@ public class GameDriver {
 		gameManager.playerCreator();
 		
 		//TODO while goes here 
-		boolean gameEnd;
+		//boolean gameEnd;
 		
+		//if "Y" then game reset then start again
 		do {
 			//deals cards to players
 			gameManager.playerSetCardHand();
@@ -103,9 +107,10 @@ public class GameDriver {
 			
 			//need to go through each player and check their decision 
 			gameManager.playerDecision();
-			
-			gameEnd = gameManager.endGameSequence();
-		} while (gameEnd);
+			System.out.println("here1");
+			//gameEnd = gameManager.endGameSequence();
+			//System.out.println("here2");
+		} while (!GameManager.gameEnd);
 
 		System.out.println("Game End!");
 		System.exit(0);

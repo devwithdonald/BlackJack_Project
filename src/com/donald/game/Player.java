@@ -27,7 +27,12 @@ public class Player {
 
 
 
-	// constructor - IT NEEDS TO INITIALIZE THE CARDHAND
+	// constructor - IT NEEDS TO INITIALIZE THE CARDHAND	
+	public Player() {
+		cardHand = new ArrayList<>();
+	}
+
+	// getter and setter
 	public int getPoints() {
 		return points;
 	}
@@ -36,11 +41,7 @@ public class Player {
 		this.points = points;
 	}
 	
-	public Player() {
-		cardHand = new ArrayList<>();
-	}
-
-	// getter and setter
+	
 	public int getCardHandTotal() {
 		return this.cardHandTotal;
 	}
