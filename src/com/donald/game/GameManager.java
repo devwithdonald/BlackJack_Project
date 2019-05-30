@@ -9,22 +9,17 @@ public class GameManager {
 
 	// keeping track of turns
 	public static int turnNumber = 0;
-	
+
 	private boolean gameEnd = false;
 	// keep track of dealer index
 	private int dealerTrackerIndex;
 	private boolean allPlayersBusted = false;
 	// player numbers
 	private int numberOfPlayers = 0;
-	//list of players
+	// list of players
 	private List<Player> listOfPlayers = new ArrayList<>();
 
-	
-	
-	
-
-
-	//TODO constructors
+	// TODO constructors
 	public boolean isGameEnd() {
 		return gameEnd;
 	}
@@ -32,7 +27,7 @@ public class GameManager {
 	public void setGameEnd(boolean gameEnd) {
 		this.gameEnd = gameEnd;
 	}
-	
+
 	public int getDealerTrackerIndex() {
 		return dealerTrackerIndex;
 	}
@@ -40,7 +35,7 @@ public class GameManager {
 	public void setDealerTrackerIndex(int dealerTrackerIndex) {
 		this.dealerTrackerIndex = dealerTrackerIndex;
 	}
-		
+
 	public boolean isAllPlayersBusted() {
 		return allPlayersBusted;
 	}
@@ -48,7 +43,7 @@ public class GameManager {
 	public void setAllPlayersBusted(boolean allPlayersBusted) {
 		this.allPlayersBusted = allPlayersBusted;
 	}
-	
+
 	public int getNumberOfPlayers() {
 		return numberOfPlayers;
 	}
@@ -60,21 +55,8 @@ public class GameManager {
 	public List<Player> getListOfPlayers() {
 		return listOfPlayers;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-
-	//METHODS
+	// METHODS
 	// take in turnNumber & players
 	public void playerCreator() {
 		// ask how many players?
@@ -160,14 +142,14 @@ public class GameManager {
 
 				// getting this player
 				// System.out.println("getting this player --->" + listOfPlayers.get(i));
-				
-				if(getListOfPlayers().get(getDealerTrackerIndex()) instanceof Dealer) {
+
+				if (getListOfPlayers().get(getDealerTrackerIndex()) instanceof Dealer) {
 					//
 					Dealer dealer = (Dealer) getListOfPlayers().get(getDealerTrackerIndex());
 					getListOfPlayers().get(i).addCardToHand(dealer.dealAnotherCard());
 				}
-				//HELP DEALER
-				//getListOfPlayers().get(i).addCardToHand(Dealer.dealAnotherCard());
+				// HELP DEALER
+				// getListOfPlayers().get(i).addCardToHand(Dealer.dealAnotherCard());
 
 				// size
 				// System.out.println("Card Hand Size: " +
@@ -267,157 +249,206 @@ public class GameManager {
 				// has to be h for hit or s for stand
 
 				String decision = "";
-				
-				//Logic!
+
+				// Logic!
 				// loop through the listofplayers array
 				// loop through each player card
 				// check if any card is .equals("ace")
-				//if it is ask, whether the players want to plays as 1 or 11
+				// if it is ask, whether the players want to plays as 1 or 11
 				// -- if "1" then assign card.value to 1
 				// -- else carry on, because card is already 11
-				//MIGHT NEED ANOTHER DO LOOP TO CHECK GOOD INPUT
-				
-				//already going through player index so need to go through card
-				
-				//go through card hand size --
-				//for ace!!!!!
-				//should b own method
-				//TODO BE METHOd
+				// MIGHT NEED ANOTHER DO LOOP TO CHECK GOOD INPUT
+
+				// already going through player index so need to go through card
+
+				// go through card hand size --
+				// for ace!!!!!
+				// should b own method
+				// TODO BE METHOd
 				for (int j = 0; j < getListOfPlayers().get(i).getCardHand().size(); j++) {
 					if (getListOfPlayers().get(i).getCardHand().get(j).getCardFace().equals("Ace")) {
-						//ask user if they wanna use it as 1 or 11
-						//also should display user what they got after right?
+						// ask user if they wanna use it as 1 or 11
+						// also should display user what they got after right?
 						String input = "";
 						boolean validInput = false;
-						//scanner 
+						// scanner
 						do {
 							Scanner scanner = new Scanner(System.in);
+
 							
-							System.out.println("You have an Ace!! Would you like to play this as a 1 or 11?");
-							//call card total
+							System.out.println("Player " + (i+1)+ " has an Ace!! Would you like to play this as a 1 or 11?");
+							// call card total
 							getListOfPlayers().get(i).addCardTotal();
-							System.out.println("If you play this as a 11 you will have " + getListOfPlayers().get(i).getCardHandTotal());
-							System.out.println("If you play this as a 1 you will have a " + (getListOfPlayers().get(i).getCardHandTotal() - 10));
-							
+							System.out.println("If you play this as a 11 you will have "
+									+ getListOfPlayers().get(i).getCardHandTotal());
+							System.out.println("If you play this as a 1 you will have a "
+									+ (getListOfPlayers().get(i).getCardHandTotal() - 10));
+
 							System.out.println("Please input 1 or 11 to move on!");
 							input = scanner.nextLine();
-							
-							if(input.equals("1")) {
+
+							if (input.equals("1")) {
 								validInput = true;
 							} else if (input.equals("11")) {
 								validInput = true;
 							}
-							
-							
-						}while(!validInput);
-						
-						//logic to make 1 an 11
+
+						} while (!validInput);
+
+						// logic to make 1 an 11
 						//
 						int newValue = Integer.parseInt(input);
-						
+
 						getListOfPlayers().get(i).getCardHand().get(j).setCardValue(newValue);
-						
-						System.out.println("You have successfully turn your " + getListOfPlayers().get(i).getCardHand().get(j).getCardFace() + " to the value of " + getListOfPlayers().get(i).getCardHand().get(j).getCardValue());
+
+						System.out.println("You have successfully turned your "
+								+ getListOfPlayers().get(i).getCardHand().get(j).getCardFace() + " to the value of "
+								+ getListOfPlayers().get(i).getCardHand().get(j).getCardValue());
 					}
 				}
-				
-				
-				
-				
-				
-				
 
-				// TODO TODO TODO TODO copied this from above
-				do {
-					
-					
-					
-					
-					
-					
-					
-					// ask user if hit or stand
-					// scan.nextLine();
+				// add card total
+				getListOfPlayers().get(i).addCardTotal();
+				// bool
+				boolean doubleDecision = false;
 
-					// wont need this
-					// if dealer
-					if (getListOfPlayers().get(i).isDealer()) {
-						System.out.println("Dealer has the hand total of: " + getListOfPlayers().get(i).getCardHandTotal());
-					} else {
-						getListOfPlayers().get(i).addCardTotal();
-						System.out.println("Player " + (i + 1) + " has the hand total of: "
-								+ getListOfPlayers().get(i).getCardHandTotal());
-					}
+				if (getListOfPlayers().get(i).getCardHandTotal() == 9
+						|| getListOfPlayers().get(i).getCardHandTotal() == 10
+						|| getListOfPlayers().get(i).getCardHandTotal() == 11) {
+					// double functionality
 
-					System.out.println("Please choose if you would like to hit or stand (h/s)");
+					boolean validInput = false;
+					String input = "";
 
-					// while its not an int
-					// while (!scanner.hasNext()) {
-					// System.out.println("please enter a NUMBER!!!!!!!!!!!");
-					// scanner.next();
-					// }
+					do {
 
-					// decision = scan.nextLine();
+						Scanner scanner = new Scanner(System.in);
+						System.out.println("Player " + (i+1) + "has the hand total of " + getListOfPlayers().get(i).getCardHandTotal());
+						System.out.println("Would you like to double? (y/n)");
 
-					// TODO MAY NEED THIS??
-					while (!scan.hasNextLine()) {
-						System.out.println("scan the right thing..");
-						scan.next();
-					}
+						input = scanner.nextLine();
 
-					// reading input
-					decision = scan.nextLine();
-
-					// switch(decision)
-
-					if (decision.equals("h") || decision.equals("H")) {
-						// do hit method
-						
-						//TODO TODO TODO HELP DEALER
-						//prevent static method
-						if(getListOfPlayers().get(getDealerTrackerIndex()) instanceof Dealer) {
-							//
-							Dealer dealer = (Dealer) getListOfPlayers().get(getDealerTrackerIndex());
-							getListOfPlayers().get(i).playerHit(dealer.dealAnotherCard());
+						if (input.equals("y") || input.equals("Y")) {
+							validInput = true;
+							doubleDecision = true;
+							
+							// double functionality
+							// call hit method only once!
+							if (getListOfPlayers().get(getDealerTrackerIndex()) instanceof Dealer) {
+								Dealer dealer = (Dealer) getListOfPlayers().get(getDealerTrackerIndex());
+								getListOfPlayers().get(i).playerHit(dealer.dealAnotherCard());
+							}
+							
+							//call add card total 
+							getListOfPlayers().get(i).addCardTotal();
+							
+							// displayer
+							System.out.println("You were dealt 1 card & now have the hand total of " + getListOfPlayers().get(i).getCardHandTotal());
+							
+							// set double to true
+							getListOfPlayers().get(i).setDoubleDown(true);
+							
+							
+						} else if (input.equals("n") || input.equals("N")) {
+							validInput = true;
+							doubleDecision = false;
 						}
-						
-						//TODO COMMENTED
-						
-						//!!!!!!!
-						//getListOfPlayers().get(i).playerHit(Dealer.dealAnotherCard());
-						
-						
-						// after hit method ask if they wanna hit again?
 
-						// repeat^
-						// TODO TODO check value if busted method should run
-						// TODO TODO NEED TO KEEP TRACK OF WINNERS AND LOSERS AND AT END OF GAME NEED TO
-						// TODO TODO FIGURE OUT WHO WON OR LOSE
-						// TODO TODO WHEN GAME IS OVER (GAMEOVER = TRUE) ADD POINTS TO PLAYERS WHO WIN
-						// STATE IS TRUE
-						// TODO TODO IF DEALER WINS NO ONE ONES
-						// TODO TODO TIE WITH DEALER
-						if (getListOfPlayers().get(i).getCardHandTotal() > 21) {
-							// PLAYER BUST
-							// CALL THE BUST METHOD
+					} while (!validInput);
+
+
+					
+
+					// TODO TODO TODO TODO copied this from above
+				}
+
+				// fix
+				if (doubleDecision == false) {
+					do {
+
+						// ask user if hit or stand
+						// scan.nextLine();
+
+						// wont need this
+						// if dealer
+						if (getListOfPlayers().get(i).isDealer()) {
+							System.out.println(
+									"Dealer has the hand total of: " + getListOfPlayers().get(i).getCardHandTotal());
+						} else {
+							getListOfPlayers().get(i).addCardTotal();
 							System.out.println("Player " + (i + 1) + " has the hand total of: "
 									+ getListOfPlayers().get(i).getCardHandTotal());
-							System.out.println("Busted. Sorry :-(");
-							getListOfPlayers().get(i).setBust(true);
-							stand = true;
-
 						}
 
-					} else if (decision.equals("s") || decision.equals("S")) {
-						// break out of loop
-						stand = true;
-					} else {
-						System.out.println("please enter a valid 's' or 'h'");
-						// isNotValidNumber = true;
-					}
-					// scanner.close();
-				} while (stand == false);
+						System.out.println("Please choose if you would like to hit or stand (h/s)");
 
+						// while its not an int
+						// while (!scanner.hasNext()) {
+						// System.out.println("please enter a NUMBER!!!!!!!!!!!");
+						// scanner.next();
+						// }
+
+						// decision = scan.nextLine();
+
+						// TODO MAY NEED THIS??
+						while (!scan.hasNextLine()) {
+							System.out.println("scan the right thing..");
+							scan.next();
+						}
+
+						// reading input
+						decision = scan.nextLine();
+
+						// switch(decision)
+
+						if (decision.equals("h") || decision.equals("H")) {
+							// do hit method
+
+							// TODO TODO TODO HELP DEALER
+							// prevent static method
+							if (getListOfPlayers().get(getDealerTrackerIndex()) instanceof Dealer) {
+								//
+								Dealer dealer = (Dealer) getListOfPlayers().get(getDealerTrackerIndex());
+								getListOfPlayers().get(i).playerHit(dealer.dealAnotherCard());
+							}
+
+							// TODO COMMENTED
+
+							// !!!!!!!
+							// getListOfPlayers().get(i).playerHit(Dealer.dealAnotherCard());
+
+							// after hit method ask if they wanna hit again?
+
+							// repeat^
+							// TODO TODO check value if busted method should run
+							// TODO TODO NEED TO KEEP TRACK OF WINNERS AND LOSERS AND AT END OF GAME NEED TO
+							// TODO TODO FIGURE OUT WHO WON OR LOSE
+							// TODO TODO WHEN GAME IS OVER (GAMEOVER = TRUE) ADD POINTS TO PLAYERS WHO WIN
+							// STATE IS TRUE
+							// TODO TODO IF DEALER WINS NO ONE ONES
+							// TODO TODO TIE WITH DEALER
+							if (getListOfPlayers().get(i).getCardHandTotal() > 21) {
+								// PLAYER BUST
+								// CALL THE BUST METHOD
+								System.out.println("Player " + (i + 1) + " has the hand total of: "
+										+ getListOfPlayers().get(i).getCardHandTotal());
+								System.out.println("Busted. Sorry :-(");
+								getListOfPlayers().get(i).setBust(true);
+								stand = true;
+
+							}
+
+						} else if (decision.equals("s") || decision.equals("S")) {
+							// break out of loop
+							stand = true;
+						} else {
+							System.out.println("please enter a valid 's' or 'h'");
+							// isNotValidNumber = true;
+						}
+						// scanner.close();
+					} while (stand == false);
+					// else!!!
+				}
 			} else if (getListOfPlayers().get(i).isDealer()) {
 				// dealer should do other stuff
 				turnNumber = 1;
@@ -441,11 +472,11 @@ public class GameManager {
 				if (bustCounter == getListOfPlayers().size() - 1) {
 					// SHOULD B END OF GAME!
 					setAllPlayersBusted(true);
-					//show dealer result
-					//add card total
+					// show dealer result
+					// add card total
 					getListOfPlayers().get(dealerTrackerIndex).addCardTotal();
 					System.out.println("Dealer had the hand total of: " + getListOfPlayers().get(i).getCardHandTotal());
-					
+
 					System.out.println(
 							"breaking because everyone busted -> should get out of method and calculate winners");
 					System.out.println("dont call calulate game here");
@@ -462,12 +493,12 @@ public class GameManager {
 
 				while (getListOfPlayers().get(i).getCardHandTotal() < 16) {
 					System.out.println("Dealer has the hand total of: " + getListOfPlayers().get(i).getCardHandTotal());
-					if(getListOfPlayers().get(getDealerTrackerIndex()) instanceof Dealer) {
+					if (getListOfPlayers().get(getDealerTrackerIndex()) instanceof Dealer) {
 						//
 						Dealer dealer = (Dealer) getListOfPlayers().get(getDealerTrackerIndex());
 						getListOfPlayers().get(i).playerHit(dealer.dealAnotherCard());
 					}
-					//getListOfPlayers().get(i).playerHit(Dealer.dealAnotherCard());
+					// getListOfPlayers().get(i).playerHit(Dealer.dealAnotherCard());
 
 				}
 
@@ -571,8 +602,8 @@ public class GameManager {
 						System.out.println("Player " + (i + 1) + " won!");
 						System.out.println("--calling points adder--");
 						pointsAdder(getListOfPlayers().get(i));
-					} else if (getListOfPlayers().get(i).getCardHandTotal() == getListOfPlayers().get(getDealerTrackerIndex())
-							.getCardHandTotal()) {
+					} else if (getListOfPlayers().get(i).getCardHandTotal() == getListOfPlayers()
+							.get(getDealerTrackerIndex()).getCardHandTotal()) {
 						getListOfPlayers().get(i).setTie(true);
 						System.out.println("Player " + (i + 1) + " tied!");
 						System.out.println("--calling points adder--");
@@ -624,7 +655,8 @@ public class GameManager {
 			System.out.println("10 Points Deducted! ->" + player.getPoints());
 
 			// INSURANCE
-			if (player.isInsurance() == true && getListOfPlayers().get(getDealerTrackerIndex()).getCardHandTotal() == 21) {
+			if (player.isInsurance() == true
+					&& getListOfPlayers().get(getDealerTrackerIndex()).getCardHandTotal() == 21) {
 				// player only gets 5 points
 				player.setPoints(player.getPoints() + 5);
 				System.out.println("5 Points Added (insurance)! ->" + player.getPoints());
@@ -646,7 +678,7 @@ public class GameManager {
 //			// winner and checking if double down
 //			if (!listOfPlayers.get(i).isBust()) {
 //				if (!listOfPlayers.get(i).doubleDown) {
-		
+
 //					listOfPlayers.get(i).setPoints(listOfPlayers.get(i).getPoints() + 10);
 //				} else if (listOfPlayers.get(i).doubleDown && listOfPlayers.get(i).insurance) {
 //					listOfPlayers.get(i).setPoints(listOfPlayers.get(i).getPoints() + 20);
@@ -751,10 +783,7 @@ public class GameManager {
 			}
 
 		}
-		
-		
-		
-		
+
 	}
 
 	// displays all points
