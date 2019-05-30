@@ -9,7 +9,7 @@ public class GameManager {
 
 	//
 	public static boolean gameEnd = false;
-	
+
 	// keep track of dealer index
 	public static int dealerTrackerIndex = 0;
 	public static boolean allPlayersBusted = false;
@@ -88,10 +88,7 @@ public class GameManager {
 
 		// card deck??
 		CardDeck cardDeck = new CardDeck();
-		
-		
-		
-		
+
 		// TODO TURN NUMBER IS LESS THAN 1
 
 		// need to do this until every player has two cards run through this size * 2
@@ -434,18 +431,15 @@ public class GameManager {
 					}
 				}
 			}
-			
-			
 
 		}
-		
+
 		// game over
 		// TODO CALL GAME END METHOD HERE!!! DISPLAY POINTS AND ASK IF WANT TO PLAY
 		// AGAIN
 
 		System.out.println("--need to call game end method here---");
 		endGameSequence();
-
 
 	}
 
@@ -460,33 +454,33 @@ public class GameManager {
 		if (player.win == true) {
 			player.setPoints(player.getPoints() + 10);
 			// shows point accumulated
-			System.out.println("Points added! ->" + player.getPoints());
+			System.out.println("10 Points added! ->" + player.getPoints());
 			// if player doubled
 			if (player.doubleDown == true) {
 				player.setPoints(player.getPoints() + 10);
 				// shows point accumulated
-				System.out.println("Doubled Down! Points added! ->" + player.getPoints());
+				System.out.println("Doubled Down! Another 10 Points added! ->" + player.getPoints());
 			}
 
 		} else if (player.tie) {
 			player.setPoints(player.getPoints());
-			System.out.println("Tie! No points given or taken! ->" + player.getPoints());
+			System.out.println("Tie! No points taken or deducted! ->" + player.getPoints());
 		} else if (player.win == false) {
 			// LOSER
 			player.setPoints(player.getPoints() - 10);
-			System.out.println("Points deducted! ->" + player.getPoints());
+			System.out.println("10 Points Deducted! ->" + player.getPoints());
 
 			// INSURANCE
 			if (player.insurance == true && listOfPlayers.get(dealerTrackerIndex).getCardHandTotal() == 21) {
 				// player only gets 5 points
 				player.setPoints(player.getPoints() + 5);
-				System.out.println("Points added (insurance)! ->" + player.getPoints());
-			} 
+				System.out.println("5 Points Added (insurance)! ->" + player.getPoints());
+			}
 
 			// DOUBLE DOWN
 			if (player.doubleDown == true) {
 				player.setPoints(player.getPoints() - 10);
-				System.out.println("Doubled Down! points deducted ->" + player.getPoints());
+				System.out.println("Doubled Down! 10 Points Deducted ->" + player.getPoints());
 			}
 		}
 
@@ -534,66 +528,81 @@ public class GameManager {
 		// the they dont want to play again
 		//
 		// display points
-		
-		//restart
+
+		// restart
 		gameEnd = false;
-		
-		
+
 		pointsDisplayer();
 		// return boolean;
-		
+
 		Scanner scanner = new Scanner(System.in);
-		
+
 		boolean validInput = true;
 		String input = "";
-		
-		//play again??????????????
+
+		// play again??????????????
 		do {
 			System.out.println("Would you like to play again? (y/n)");
-			
+
 			input = scanner.nextLine();
-			
+
 			if (input.equals("y") || input.equals("Y")) {
 				validInput = false;
 				gameEnd = false;
 				System.out.println("--calling game reset method--");
 				gameReset();
-			} else if(input.equals("n") || input.equals("N")){
+			} else if (input.equals("n") || input.equals("N")) {
 				validInput = false;
 				gameEnd = true;
 			}
 		} while (validInput);
-		
+
 		// scanner.close();
 		// System.exit(0);
-		
+
 //		if (input.equals("y") || input.equals("Y")) {
 //			System.out.println("Starting New Game");
 //			playerSetCardHand();
 //		} else if (input.equals("n") || input.equals("N")) {
 //			System.out.println("GOODBYE");
 //		}
-		
-		
-		//return gameEnd;
-		
-		
-		
-		
-		
-		
+
+		// return gameEnd;
 
 	}
 
-	
-	//TODO
+	// TODO
 	public void gameReset() {
 		System.out.println("--in gameReset method--");
-		//reset game but dont reset player score!
-		//loop through the players and remove all cards and put them back into the deck?
+		// reset game but dont reset player score!
+		// loop through the players and remove all cards and put them back into the
+		// deck?
 		//
+
+		// get their card hand and remove everything from it
+
+		// EMPTY THE HANDS
+		// RESET GAME STATE
+		for (int i = 0; i < listOfPlayers.size(); i++) {
+			// for (int j = 0; j < listOfPlayers.get(i).getCardHand().size(); j++) {
+			for (int j = 0; j < 1; j++) {
+				System.out.println("Empty Cards");
+				listOfPlayers.get(i).getCardHand().removeAll(listOfPlayers.get(i).getCardHand());
+				listOfPlayers.get(i).doubleDown = false;
+				listOfPlayers.get(i).insurance = false;
+				listOfPlayers.get(i).tie = false;
+				listOfPlayers.get(i).win = false;
+				listOfPlayers.get(i).setBust(false);
+				turnNumber = 0;
+			}
+
+		}
+		
+		
+		
+		
 	}
-	
+
 	// displays all points
 	public void pointsDisplayer() {
 		System.out.println("--in pointsDisplayer Method--");
@@ -631,9 +640,6 @@ public class GameManager {
 					listOfPlayers.get(i).insurance = false;
 					validResponse = true;
 				}
-			
-				
-				
 
 			} while (validResponse);
 
