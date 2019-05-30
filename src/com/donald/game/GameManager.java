@@ -128,11 +128,27 @@ public class GameManager {
 
 		// the dealer needs to check if he has an ACE then flip it and game over
 		// else continue on with the game
+
+		// TODO BROKEN
+		// TODO MAY NEED HUGE IF ELSE STATEMENT!!!!!
 		if (listOfPlayers.get(dealerTrackerIndex).getCardHand().get(0).getCardFace().equals("Ace")) {
 			System.out.println("--dealer has ace. players have decision to get insurance--");
 
-			//  INSURANCE HERE
+			// INSURANCE HERE
 			setInsurance();
+
+			if (listOfPlayers.get(dealerTrackerIndex).getCardHand().get(1).getCardValue() == 10) {
+				// turncounter?
+				turnNumber = 1;
+				// hand viewer
+				listOfPlayers.get(dealerTrackerIndex).handViewer();
+				System.out.println(
+						"dealer has 21! end of game with insurance!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! --calculateGame-- should be called");
+				calculateGame();
+				gameReset();
+				System.out.println("after calculate game!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			}
+
 		}
 
 		Scanner scan = new Scanner(System.in);
@@ -143,6 +159,8 @@ public class GameManager {
 
 			if (!listOfPlayers.get(i).isDealer) {
 
+				// double
+				boolean db = false;
 				// need this in here
 				boolean stand = false;
 				// calculate what they got
@@ -176,57 +194,138 @@ public class GameManager {
 								+ listOfPlayers.get(i).getCardHandTotal());
 					}
 
-					System.out.println("Please choose if you would like to hit or stand");
+					
+					
+					
+					
+					
+					
+					
+					// if list of players card total is equal to 9,10,11 then give them the option
+					// of doubling? if not
+					// just jump to the other options....
+					if (listOfPlayers.get(i).getCardHandTotal() == 9 || listOfPlayers.get(i).getCardHandTotal() == 10
+							|| listOfPlayers.get(i).getCardHandTotal() == 11) {
 
-					// while its not an int
-					// while (!scanner.hasNext()) {
-					// System.out.println("please enter a NUMBER!!!!!!!!!!!");
-					// scanner.next();
-					// }
+						System.out.println("Would you like to double? (y/n)");
+						
+						// if it does double
+						// -- set double == true
+						// -- else set double == false
+						// set something true or not here for the else if
+						//should break if not
+						
 
-					// decision = scan.nextLine();
 
-					// TODO MAY NEED THIS??
-					while (!scan.hasNextLine()) {
-						System.out.println("scan the right thing..");
-						scan.next();
-					}
-
-					// reading input
-					decision = scan.nextLine();
-
-					// switch(decision)
-
-					if (decision.equals("h") || decision.equals("H")) {
-						// do hit method
-						listOfPlayers.get(i).playerHit(Dealer.dealAnotherCard());
-						// after hit method ask if they wanna hit again?
-
-						// repeat^
-						// TODO TODO check value if busted method should run
-						// TODO TODO NEED TO KEEP TRACK OF WINNERS AND LOSERS AND AT END OF GAME NEED TO
-						// TODO TODO FIGURE OUT WHO WON OR LOSE
-						// TODO TODO WHEN GAME IS OVER (GAMEOVER = TRUE) ADD POINTS TO PLAYERS WHO WIN
-						// STATE IS TRUE
-						// TODO TODO IF DEALER WINS NO ONE ONES
-						// TODO TODO TIE WITH DEALER
-						if (listOfPlayers.get(i).getCardHandTotal() > 21) {
-							// PLAYER BUST
-							// CALL THE BUST METHOD
-							System.out.println("Player " + (i + 1) + " has the hand total of: "
-									+ listOfPlayers.get(i).getCardHandTotal());
-							System.out.println("Busted. Sorry :-(");
-							listOfPlayers.get(i).setBust(true);
-							stand = true;
-
+						// TODO MAY NEED THIS??
+						while (!scan.hasNextLine()) {
+							System.out.println("scan the right thing..");
+							scan.next();
 						}
 
-					} else if (decision.equals("s") || decision.equals("S")) {
-						// break out of loop
-						stand = true;
-					} else {
-						System.out.println("please enter a valid 's' or 'h'");
-						// isNotValidNumber = true;
+						// reading input
+						decision = scan.nextLine();
+
+						// switch(decision)
+
+						if (decision.equals("y") || decision.equals("Y")) {
+							// do hit method
+							listOfPlayers.get(i).playerHit(Dealer.dealAnotherCard());
+							// after hit method ask if they wanna hit again?
+
+							// repeat^
+							if (listOfPlayers.get(i).getCardHandTotal() > 21) {
+								// PLAYER BUST
+								// CALL THE BUST METHOD
+								System.out.println("Player " + (i + 1) + " has the hand total of: "
+										+ listOfPlayers.get(i).getCardHandTotal());
+								System.out.println("Busted. Sorry :-(");
+								listOfPlayers.get(i).setBust(true);
+								stand = true;
+								
+
+							}
+							
+							//TODO NEED THIS????
+							db = true;
+							listOfPlayers.get(i).doubleDown = true;
+							//VIEW HAND
+							listOfPlayers.get(i).handViewer();
+							System.out.println("Player " + (i + 1) + " has the hand total of: "
+									+ listOfPlayers.get(i).getCardHandTotal());
+
+
+						} else if (decision.equals("n") || decision.equals("N")) {
+							// break out of loop
+							db = false;
+							System.out.println("here");
+							//need to go to else if 
+						} else {
+							System.out.println("please enter a valid 'y' or 'n'");
+							// isNotValidNumber = true;
+						}
+						
+
+						
+						
+						System.out.println("what is db: "+ db);
+						//
+						if (db) {
+							break;
+						}
+						
+						
+						
+						
+						// do else if for split();
+					} else if (db == false) {
+
+						System.out.println("Please choose if you would like to hit or stand (h/s)");
+
+						// while its not an int
+						// while (!scanner.hasNext()) {
+						// System.out.println("please enter a NUMBER!!!!!!!!!!!");
+						// scanner.next();
+						// }
+
+						// decision = scan.nextLine();
+
+						// TODO MAY NEED THIS??
+						while (!scan.hasNextLine()) {
+							System.out.println("scan the right thing..");
+							scan.next();
+						}
+
+						// reading input
+						decision = scan.nextLine();
+
+						// switch(decision)
+
+						if (decision.equals("h") || decision.equals("H")) {
+							// do hit method
+							listOfPlayers.get(i).playerHit(Dealer.dealAnotherCard());
+							// after hit method ask if they wanna hit again?
+
+							// repeat^
+							if (listOfPlayers.get(i).getCardHandTotal() > 21) {
+								// PLAYER BUST
+								// CALL THE BUST METHOD
+								System.out.println("Player " + (i + 1) + " has the hand total of: "
+										+ listOfPlayers.get(i).getCardHandTotal());
+								System.out.println("Busted. Sorry :-(");
+								listOfPlayers.get(i).setBust(true);
+								stand = true;
+
+							}
+
+						} else if (decision.equals("s") || decision.equals("S")) {
+							// break out of loop
+							stand = true;
+						} else {
+							System.out.println("please enter a valid 's' or 'h'");
+							// isNotValidNumber = true;
+						}
+
 					}
 					// scanner.close();
 				} while (stand == false);
@@ -417,24 +516,23 @@ public class GameManager {
 				// shows point accumulated
 				System.out.println("Doubled Down! Another 10 Points added! ->" + player.getPoints());
 			}
-			
-			//insurance
-			if(player.insurance == true) {
+
+			// insurance
+			if (player.insurance == true) {
 				player.setPoints(player.getPoints() - 5);
 				System.out.println("5 Points Deducted - Insurance!" + player.getPoints());
 			}
-			
 
 		} else if (player.tie) {
 			player.setPoints(player.getPoints());
 			System.out.println("Tie! No points taken or deducted! ->" + player.getPoints());
-			
-			//insurance
-			if(player.insurance == true) {
+
+			// insurance
+			if (player.insurance == true) {
 				player.setPoints(player.getPoints() - 5);
 				System.out.println("5 Points Deducted - Insurance!" + player.getPoints());
 			}
-			
+
 		} else if (player.win == false) {
 			// LOSER
 			player.setPoints(player.getPoints() - 10);
@@ -567,6 +665,8 @@ public class GameManager {
 
 		}
 
+		// call view game state
+		// TODO
 	}
 
 }
