@@ -6,6 +6,7 @@ import java.util.List;
 public class Player {
 
 	// player has cardHard list (2 -> can be more)
+	//TODO NEED TO ENCAPSULATE
 	public boolean isDealer = false;
 	public boolean doubleDown = false;
 	public boolean insurance = false;
@@ -14,7 +15,7 @@ public class Player {
 	public boolean tie = false;
 	
 	private List<Card> cardHand;
-	// private CardHand cardHand;
+	
 	// player has a card SUM
 	private int cardHandTotal;
 	
@@ -27,12 +28,12 @@ public class Player {
 
 
 
-	// constructor - IT NEEDS TO INITIALIZE THE CARDHAND	
+	// constructor - needs to initialize the cardHand	
 	public Player() {
 		cardHand = new ArrayList<>();
 	}
 
-	// getter and setter
+	// getter and setters
 	public int getPoints() {
 		return points;
 	}
@@ -67,7 +68,7 @@ public class Player {
 		this.bust = bust;
 	}
 
-	// methods
+
 	// method to add cardTotal
 	public void addCardTotal() {
 		int total = 0;
@@ -94,10 +95,7 @@ public class Player {
 
 	}
 
-	// TODO view cards
-	// DEALER will probably need to override this
-	// will need to add this to method functions after the functionalty methods
-	// very end right before the return!
+
 	public void handViewer() {
 
 		// for every card in card hand say this
@@ -114,6 +112,7 @@ public class Player {
 	
 	//TODO MAKE CARD SPLIT METHOD
 	
+	
 	//TODO  MAKE CAR DOUBLE METHOD
 	
 
@@ -124,9 +123,6 @@ public class Player {
 		this.cardHand.add(card);
 	}
 	
-//	public void removeCardFromHand(Card card) {
-//		
-//	}
 
 	@Override
 	public String toString() {

@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class GameManager {
 
-	//
+	// TODO NEED TO ENCAPSULATE
 	public static boolean gameEnd = false;
 
 	// keep track of dealer index
@@ -20,11 +20,9 @@ public class GameManager {
 	public static int numberOfPlayers = 0;
 	public List<Player> listOfPlayers = new ArrayList<>();
 
-	// take in turnNumber & players
+	// Methods
 	public void playerCreator() {
-		// ask how many players?
 		// create player objects based on how many players the user says 1-4
-		// store those player objects in a list?
 		// always create one dealer object
 
 		// scanner class to read input
@@ -47,7 +45,6 @@ public class GameManager {
 
 			playerNumber = scanner.nextInt();
 			scanner.nextLine();
-			// TODO ADDINGTHIS
 
 			if (playerNumber > 0 && playerNumber <= 4) {
 				numberOfPlayers = playerNumber;
@@ -68,7 +65,6 @@ public class GameManager {
 		}
 
 		// CREATE DEALER OBJECT & add to list of players
-		// TODO DEALER IS TRUE
 		Dealer dealer = new Dealer();
 		dealer.isDealer = true;
 		listOfPlayers.add(dealer);
@@ -76,57 +72,33 @@ public class GameManager {
 		// keeping track of the dealer index as int to use in future
 		dealerTrackerIndex = listOfPlayers.size() - 1;
 
-		// dont close yet
-		// scanner.close();
-
 	}
 
-	// TODO ADD CARD HANDS
 	// add card hands depending on size and make sure dealer gets a hand
-
 	public void playerSetCardHand() {
 
-		// card deck??
+		// card deck
 		CardDeck cardDeck = new CardDeck();
-
-		// TODO TURN NUMBER IS LESS THAN 1
 
 		// need to do this until every player has two cards run through this size * 2
 		// times
-
 		int cardDealCounter = 0;
 		while (cardDealCounter < listOfPlayers.size() * 2) {
 			for (int i = 0; i < listOfPlayers.size(); i++) {
 				// if object is dealer then give hand
 				// dealer is getting cards
 
-				// TODO NEED TO ORDER EACH CARD IS DEALT 1 BY 1
-				// System.out.println("HEREEEEEEEEEEEEEEEEEE");
-
 				// getting this player
-				// System.out.println("getting this player --->" + listOfPlayers.get(i));
 				listOfPlayers.get(i).addCardToHand(Dealer.dealAnotherCard());
 
-				// size
-				// System.out.println("Card Hand Size: " +
-				// listOfPlayers.get(i).getCardHand().size());
 				cardDealCounter++;
-				// while?
-				// for (int j = 0; listOfPlayers.get(i).getCardHand().size() < 2; j++) {
-				//
-				// }
 
-				// THIS SHOULD ASSIGN ONE CARD TO THE CARDHAND OF THE CERTAIN PLAYER
-				// listOfPlayers.get(i).addCardToHand(Dealer.dealAnotherCard());
-				// SHOULD RETURN ONE CARD?
-				// player.setCardHand();
 			}
 		}
-		// turnNumber++;
 
 	}
 
-	// TODO viewGameStateMethod (so the players can view the state)
+	// viewGameState (so the players can view the state of the game)
 	public void viewGameState() {
 		// print out all
 		// player 1 (i) has cards..
@@ -137,17 +109,7 @@ public class GameManager {
 		for (int i = 0; i < listOfPlayers.size(); i++) {
 			// iterate through the players card list and print them
 
-			// TODO if i not last i only
-
-			// System.out.println("listOfPlayer.size() " + listOfPlayers.size());
-
-			// j -> i in get()
-			// for (int j = 0; j < listOfPlayers.get(i).getCardHand().size(); j++) {
-			// call the handview for it
-			// check first if you can just call hand viewer on each
-			// System.out.println("Hand Viewer i: " + i);
-
-			// TODO IF LAST PLAYER THEN IT IS DEALER
+			// IF LAST PLAYER THEN IT IS DEALER
 			if (listOfPlayers.get(i).isDealer) {
 				System.out.println("\nDealer has the hand of: ");
 				listOfPlayers.get(i).handViewer();
@@ -158,24 +120,18 @@ public class GameManager {
 
 			System.out.println(" ");
 
-			// System.out.println("T " + i + "has the hand of: ");
-			// }
 		}
 
 	}
 
-	// TODO need to go through each player and check their decision
-	// TODO NEED GAME FUNCTIONALITY
-	// NEED TO ADD CARD TOTAL FIRST
-	// increment turnRound AFTER EVERYTHING!!!!!
 	public void playerDecision() {
 
 		// the dealer needs to check if he has an ACE then flip it and game over
 		// else continue on with the game
 		if (listOfPlayers.get(dealerTrackerIndex).getCardHand().get(0).getCardFace().equals("Ace")) {
 			System.out.println("--dealer has ace. players have decision to get insurance--");
-			// todo need functionality here
-			// TODO
+
+			//  INSURANCE HERE
 			setInsurance();
 		}
 
@@ -454,17 +410,31 @@ public class GameManager {
 		if (player.win == true) {
 			player.setPoints(player.getPoints() + 10);
 			// shows point accumulated
-			System.out.println("10 Points added! ->" + player.getPoints());
+			System.out.println("10 Points Added! ->" + player.getPoints());
 			// if player doubled
 			if (player.doubleDown == true) {
 				player.setPoints(player.getPoints() + 10);
 				// shows point accumulated
 				System.out.println("Doubled Down! Another 10 Points added! ->" + player.getPoints());
 			}
+			
+			//insurance
+			if(player.insurance == true) {
+				player.setPoints(player.getPoints() - 5);
+				System.out.println("5 Points Deducted - Insurance!" + player.getPoints());
+			}
+			
 
 		} else if (player.tie) {
 			player.setPoints(player.getPoints());
 			System.out.println("Tie! No points taken or deducted! ->" + player.getPoints());
+			
+			//insurance
+			if(player.insurance == true) {
+				player.setPoints(player.getPoints() - 5);
+				System.out.println("5 Points Deducted - Insurance!" + player.getPoints());
+			}
+			
 		} else if (player.win == false) {
 			// LOSER
 			player.setPoints(player.getPoints() - 10);
@@ -484,39 +454,6 @@ public class GameManager {
 			}
 		}
 
-		// if player wins game -> 10 points
-//		for (int i = 0; i < listOfPlayers.size(); i++) {
-//
-//			// if dealer then no points!
-//			// if()
-//
-//			// winner and checking if double down
-//			if (!listOfPlayers.get(i).isBust()) {
-//				if (!listOfPlayers.get(i).doubleDown) {
-//					listOfPlayers.get(i).setPoints(listOfPlayers.get(i).getPoints() + 10);
-//				} else if (listOfPlayers.get(i).doubleDown && listOfPlayers.get(i).insurance) {
-//					listOfPlayers.get(i).setPoints(listOfPlayers.get(i).getPoints() + 20);
-//				} else if (listOfPlayers.get(i).doubleDown) {
-//					listOfPlayers.get(i).setPoints(listOfPlayers.get(i).getPoints() + 20);
-//				}
-//			}
-
-		// winner and checking for insurance
-
-		// calculate insurance in other
-
-		// }
-
-		// if player doubles down -> 20 points
-
-		// if player loses game -> -10 points
-
-		// if player loses game while doubling down -> -20 points
-
-		// if opted for insurance and dealer has blackjack then -> 5 points
-
-		// if opeted for insurance and dealer does not have blackjack -> deduct 5 points
-
 	}
 
 	// TODO END GAME
@@ -526,7 +463,7 @@ public class GameManager {
 		// display everyones points
 		// if they play wants to play again then return true
 		// the they dont want to play again
-		//
+
 		// display points
 
 		// restart
@@ -557,18 +494,6 @@ public class GameManager {
 			}
 		} while (validInput);
 
-		// scanner.close();
-		// System.exit(0);
-
-//		if (input.equals("y") || input.equals("Y")) {
-//			System.out.println("Starting New Game");
-//			playerSetCardHand();
-//		} else if (input.equals("n") || input.equals("N")) {
-//			System.out.println("GOODBYE");
-//		}
-
-		// return gameEnd;
-
 	}
 
 	// TODO
@@ -597,10 +522,7 @@ public class GameManager {
 			}
 
 		}
-		
-		
-		
-		
+
 	}
 
 	// displays all points
@@ -613,7 +535,7 @@ public class GameManager {
 
 	}
 
-	// TODO insurance for players
+	// insurance for players
 	public void setInsurance() {
 		System.out.println("--in insurance method--");
 		// loop through the players
@@ -641,51 +563,10 @@ public class GameManager {
 					validResponse = true;
 				}
 
-			} while (validResponse);
+			} while (!validResponse);
 
 		}
 
-	}
-
-	// need these?????????
-//	public static int getTurnNumber() {
-//		return turnNumber;
-//	}
-//
-//	public static void setTurnNumber(int turnNumber) {
-//		GameManager.turnNumber = turnNumber;
-//	}
-
-	// return the dealers cards to the players card
-	// main will call this
-
-	// dealer need
-
-	// give the cardhand to the player
-//	public void cardDeal(Dealer dealer, CardHand cardHand, Player Player) {
-//		// call the dealer method dealPlayer
-//		dealer.dealPlayer(cardDeck);
-//		
-//	}
-
-	// after initial population of cards depending on hit or stand
-	// hit or stand should be in a playerAction method and call this method if
-	// needed
-
-	// methods to add the cards and return the value
-	// list of cards and pass back by the sum of them?
-	// TODO DONT NEED THIS
-	public int addCardSum(List<Integer> cards) {
-
-		int cardSum = 0;
-
-		Iterator<Integer> cardIter = cards.iterator();
-
-		while (cardIter.hasNext()) {
-			cardSum += cardIter.next();
-		}
-
-		return cardSum;
 	}
 
 }
