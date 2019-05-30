@@ -33,6 +33,7 @@ public class CardDeck {
 
 	
 	//needs to be static
+	//public static List<Card> deck = new ArrayList<>();
 	public static List<Card> deck = new ArrayList<>();
 	
 	//constructor

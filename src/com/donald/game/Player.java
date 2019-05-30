@@ -6,29 +6,61 @@ import java.util.List;
 public class Player {
 
 	// player has cardHard list (2 -> can be more)
-	//TODO NEED TO ENCAPSULATE
-	public boolean isDealer = false;
-	public boolean doubleDown = false;
-	public boolean insurance = false;
-	
-	public boolean win = false;
-	public boolean tie = false;
-	
+
+	private boolean dealer = false;
+	private boolean doubleDown = false;
+	private boolean insurance = false;
+	private boolean win = false;
+	private boolean tie = false;
 	private List<Card> cardHand;
-	
 	// player has a card SUM
 	private int cardHandTotal;
-	
-	//PLAYER LOSS WIN TO KEEP TRACK
+	// PLAYER LOSS WIN TO KEEP TRACK
 	private boolean bust = false;
-	
 	private int points;
+
 	
+	// constructor - needs to initialize the cardHand
+	public boolean isTie() {
+		return tie;
+	}
+
+	public void setTie(boolean tie) {
+		this.tie = tie;
+	}
 	
+	public boolean isWin() {
+		return win;
+	}
 
+	public void setWin(boolean win) {
+		this.win = win;
+	}
 
+	public boolean isInsurance() {
+		return insurance;
+	}
 
-	// constructor - needs to initialize the cardHand	
+	public void setInsurance(boolean insurance) {
+		this.insurance = insurance;
+	}
+
+	public boolean isDoubleDown() {
+		return doubleDown;
+	}
+
+	public void setDoubleDown(boolean doubleDown) {
+		this.doubleDown = doubleDown;
+	}
+
+	public boolean isDealer() {
+		return dealer;
+	}
+
+	public void setDealer(boolean dealer) {
+		this.dealer = dealer;
+	}
+
 	public Player() {
 		cardHand = new ArrayList<>();
 	}
@@ -41,8 +73,7 @@ public class Player {
 	public void setPoints(int points) {
 		this.points = points;
 	}
-	
-	
+
 	public int getCardHandTotal() {
 		return this.cardHandTotal;
 	}
@@ -59,7 +90,7 @@ public class Player {
 	public void setCardHand(List<Card> cardHand) {
 		this.cardHand = cardHand;
 	}
-	
+
 	public boolean isBust() {
 		return bust;
 	}
@@ -67,7 +98,6 @@ public class Player {
 	public void setBust(boolean bust) {
 		this.bust = bust;
 	}
-
 
 	// method to add cardTotal
 	public void addCardTotal() {
@@ -90,11 +120,11 @@ public class Player {
 
 		// go through cardHand list and add get card total
 		addCardTotal();
-		
-		System.out.println("Dealer dealt -> " + anotherCard.getCardFace() + " " + anotherCard.getCardSuit() + " " + anotherCard.getCardValue());
+
+		System.out.println("Dealer dealt -> " + anotherCard.getCardFace() + " " + anotherCard.getCardSuit() + " "
+				+ anotherCard.getCardValue());
 
 	}
-
 
 	public void handViewer() {
 
@@ -106,23 +136,17 @@ public class Player {
 		// "you have an *ace* of *spades*"
 
 	}
-	
-	//TODO MAKE CARD INSURANCE METHOD
-	
-	
-	//TODO MAKE CARD SPLIT METHOD
-	
-	
-	//TODO  MAKE CAR DOUBLE METHOD
-	
 
+	// TODO MAKE CARD INSURANCE METHOD
 
+	// TODO MAKE CARD SPLIT METHOD
+
+	// TODO MAKE CAR DOUBLE METHOD
 
 	// add card to hand
 	public void addCardToHand(Card card) {
 		this.cardHand.add(card);
 	}
-	
 
 	@Override
 	public String toString() {
