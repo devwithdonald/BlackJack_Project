@@ -32,7 +32,7 @@ public class CardDeck {
 	private final String[] cardFaceList = {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
 
 	
-	//make new deck ?? should b private
+	//needs to be static
 	public static List<Card> deck = new ArrayList<>();
 	
 	//constructor

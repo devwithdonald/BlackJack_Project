@@ -110,7 +110,7 @@ public class GameDriver {
 			System.out.println("here1");
 			//gameEnd = gameManager.endGameSequence();
 			//System.out.println("here2");
-		} while (!GameManager.gameEnd);
+		} while (!gameManager.isGameEnd());
 
 		System.out.println("Game End!");
 		System.exit(0);
@@ -126,7 +126,7 @@ public class GameDriver {
 		
 		
 		//print list
-		System.out.println("END-> " + gameManager.listOfPlayers);
+		System.out.println("END-> " + gameManager.getListOfPlayers());
 		
 		
 		

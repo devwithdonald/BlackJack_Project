@@ -43,6 +43,8 @@ public class Dealer extends Player {
 		return card;
 	}
 
+	
+	//passing handView
 	@Override
 	public void handViewer() {
 		// if turnNumber is 0 then show one card
