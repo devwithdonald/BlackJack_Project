@@ -282,7 +282,7 @@ public class GameManager {
 				//go through card hand size --
 				//for ace!!!!!
 				//should b own method
-				//TODO BE METHOD
+				//TODO BE METHOd
 				for (int j = 0; j < getListOfPlayers().get(i).getCardHand().size(); j++) {
 					if (getListOfPlayers().get(i).getCardHand().get(j).getCardFace().equals("Ace")) {
 						//ask user if they wanna use it as 1 or 11
@@ -293,8 +293,13 @@ public class GameManager {
 						do {
 							Scanner scanner = new Scanner(System.in);
 							
-							System.out.println("You have an Ace!! Would you like to play this as a 1 or 11? (1/11)");
+							System.out.println("You have an Ace!! Would you like to play this as a 1 or 11?");
+							//call card total
+							getListOfPlayers().get(i).addCardTotal();
+							System.out.println("If you play this as a 11 you will have " + getListOfPlayers().get(i).getCardHandTotal());
+							System.out.println("If you play this as a 1 you will have a " + (getListOfPlayers().get(i).getCardHandTotal() - 10));
 							
+							System.out.println("Please input 1 or 11 to move on!");
 							input = scanner.nextLine();
 							
 							if(input.equals("1")) {
@@ -315,6 +320,11 @@ public class GameManager {
 						System.out.println("You have successfully turn your " + getListOfPlayers().get(i).getCardHand().get(j).getCardFace() + " to the value of " + getListOfPlayers().get(i).getCardHand().get(j).getCardValue());
 					}
 				}
+				
+				
+				
+				
+				
 				
 
 				// TODO TODO TODO TODO copied this from above
@@ -339,7 +349,7 @@ public class GameManager {
 								+ getListOfPlayers().get(i).getCardHandTotal());
 					}
 
-					System.out.println("Please choose if you would like to hit or stand");
+					System.out.println("Please choose if you would like to hit or stand (h/s)");
 
 					// while its not an int
 					// while (!scanner.hasNext()) {
