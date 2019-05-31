@@ -148,7 +148,7 @@ public class GameManager {
 		// dealer (last i) has this card (can only view one card)
 
 		System.out.println("\n--------------- Dealing The Cards ---------------");
-		
+
 		for (int i = 0; i < getListOfPlayers().size(); i++) {
 
 			if (getListOfPlayers().get(i).isDealer()) {
@@ -169,7 +169,7 @@ public class GameManager {
 
 		// TODO fix insurance functionality
 		if (getListOfPlayers().get(getDealerTrackerIndex()).getCardHand().get(0).getCardFace().equals("Ace")) {
-			System.out.println("--dealer has ace. players have decision to get insurance--");
+
 
 			setInsurance();
 		}
@@ -208,14 +208,15 @@ public class GameManager {
 									"Player " + (i + 1) + " Has An Ace!! Would You Like To Play This As A 1 Or 11?\n");
 							// call card total
 							getListOfPlayers().get(i).addCardTotal();
-							System.out.println("If You Play This As A 11 You Will Have "
+							System.out.println("If You Play This As A '11' You Will Have "
 									+ getListOfPlayers().get(i).getCardHandTotal());
-							System.out.println("If You Play This As A 1 You Will Have A "
+							System.out.println("If You Play This As A '1' You Will Have A "
 									+ (getListOfPlayers().get(i).getCardHandTotal() - 10));
-							
-							System.out.println("\nDealer Is Showing Card Total ->" + getListOfPlayers().get(getDealerTrackerIndex()).getCardHand().get(0).getCardValue());
 
-							System.out.println("\nPlease Input 1 Or 11 To Move On!");
+							System.out.println("\nDealer Is Showing Card Total ->" + getListOfPlayers()
+									.get(getDealerTrackerIndex()).getCardHand().get(0).getCardValue());
+
+							System.out.println("\nPlease Input '1' Or '11' To Move On!");
 							input = scanner.nextLine();
 
 							if (input.equals("1")) {
@@ -254,7 +255,8 @@ public class GameManager {
 						Scanner scanner = new Scanner(System.in);
 						System.out.println("Player " + (i + 1) + " Has The Hand Total Of -> "
 								+ getListOfPlayers().get(i).getCardHandTotal());
-						System.out.println("\nDealer Is Showing Card Total ->" + getListOfPlayers().get(getDealerTrackerIndex()).getCardHand().get(0).getCardValue());
+						System.out.println("\nDealer Is Showing Card Total ->"
+								+ getListOfPlayers().get(getDealerTrackerIndex()).getCardHand().get(0).getCardValue());
 						System.out.println("\nWould You Like To Double? (Y)/(N)");
 
 						input = scanner.nextLine();
@@ -294,14 +296,15 @@ public class GameManager {
 
 						// if dealer
 						if (getListOfPlayers().get(i).isDealer()) {
-							System.out.println(
-									"\nDealer Has The Hand Total Of -> " + getListOfPlayers().get(i).getCardHandTotal());
+							System.out.println("\nDealer Has The Hand Total Of -> "
+									+ getListOfPlayers().get(i).getCardHandTotal());
 						} else {
 							getListOfPlayers().get(i).addCardTotal();
 							System.out.println("Player " + (i + 1) + " Has The Hand Total Of -> "
 									+ getListOfPlayers().get(i).getCardHandTotal());
-							
-							System.out.println("\nDealer Is Showing Card Total ->" + getListOfPlayers().get(getDealerTrackerIndex()).getCardHand().get(0).getCardValue());
+
+							System.out.println("\nDealer Is Showing Card Total ->" + getListOfPlayers()
+									.get(getDealerTrackerIndex()).getCardHand().get(0).getCardValue());
 						}
 
 						System.out.println("\nPlease Choose If You Would Like To Hit (H) Or Stand (S).");
@@ -370,8 +373,8 @@ public class GameManager {
 					// show dealer result
 					// add card total
 					getListOfPlayers().get(dealerTrackerIndex).addCardTotal();
-					System.out.println("\nDealer Had The Hand Total Of -> " + getListOfPlayers().get(i).getCardHandTotal());
-					
+					System.out.println(
+							"\nDealer Had The Hand Total Of -> " + getListOfPlayers().get(i).getCardHandTotal());
 
 					break;
 				}
@@ -380,7 +383,8 @@ public class GameManager {
 				getListOfPlayers().get(i).addCardTotal();
 
 				while (getListOfPlayers().get(i).getCardHandTotal() < 16) {
-					System.out.println("\nDealer Has The Hand Total Of -> " + getListOfPlayers().get(i).getCardHandTotal());
+					System.out.println(
+							"\nDealer Has The Hand Total Of -> " + getListOfPlayers().get(i).getCardHandTotal());
 
 					if (getListOfPlayers().get(getDealerTrackerIndex()) instanceof Dealer) {
 
@@ -405,7 +409,6 @@ public class GameManager {
 
 		}
 
-	
 		calculateGame();
 
 	}
@@ -413,11 +416,12 @@ public class GameManager {
 	public void calculateGame() {
 
 		for (int i = 0; i < getListOfPlayers().size() - 1; i++) {
-			
-			System.out.println("\nPlayer #" + (i+1) + " Has Hand Total -> " + getListOfPlayers().get(i).getCardHandTotal());
-			
+
+			System.out.println(
+					"\nPlayer #" + (i + 1) + " Has Hand Total -> " + getListOfPlayers().get(i).getCardHandTotal());
+
 			if (getListOfPlayers().get(i).isBust()) {
-				System.out.println("Oh No! Player #" + (i+1) + " Busted");
+				System.out.println("Oh No! Player #" + (i + 1) + " Busted");
 
 				pointsAdder(getListOfPlayers().get(i));
 			} else if (getListOfPlayers().get(getDealerTrackerIndex()).getCardHandTotal() == 21) {
@@ -432,9 +436,9 @@ public class GameManager {
 
 					pointsAdder(getListOfPlayers().get(i));
 				} else {
-					
+
 					System.out.println("Player #" + (i + 1) + " Lost!");
-					
+
 					pointsAdder(getListOfPlayers().get(i));
 				}
 			} else if (getListOfPlayers().get(getDealerTrackerIndex()).isBust()) {
@@ -485,9 +489,9 @@ public class GameManager {
 	}
 
 	public void pointsAdder(Player player) {
-		//format
+		// format
 		System.out.println("\n");
-		
+
 		// add points to the player
 		if (player.isWin() == true) {
 			player.setPoints(player.getPoints() + 10);
@@ -500,9 +504,34 @@ public class GameManager {
 				System.out.println("Doubled Down! Another 10 Points added! New Total ----> " + player.getPoints());
 			}
 
+			if (player.isInsurance() == true) {
+				player.setPoints(player.getPoints() - 5);
+				// shows point accumulated
+				System.out.println("Dealer Didn't Have BlackJack.");
+				System.out.println("5 Points Deducted (insurance)! New Total ----> " + player.getPoints());
+			}
+
 		} else if (player.isTie()) {
 			player.setPoints(player.getPoints());
 			System.out.println("Tie! No Points Taken or Deducted! Total ----> " + player.getPoints());
+
+			// INSURANCE
+			if (player.isInsurance() == true
+					&& getListOfPlayers().get(getDealerTrackerIndex()).getCardHandTotal() == 21) {
+				// player only gets 5 points
+				player.setPoints(player.getPoints() + 5);
+
+				System.out.println("5 Points Added (insurance)! New Total ----> " + player.getPoints());
+			} else if (player.isInsurance() == true) {
+				// insurance loser
+				player.setPoints(player.getPoints() - 5);
+				System.out.println("Dealer Didn't Have BlackJack.");
+				System.out.println("5 Points Deducted (insurance)! New Total ----> " + player.getPoints());
+			}
+
+			
+			
+
 		} else if (player.isWin() == false) {
 
 			// LOSER
@@ -514,9 +543,16 @@ public class GameManager {
 					&& getListOfPlayers().get(getDealerTrackerIndex()).getCardHandTotal() == 21) {
 				// player only gets 5 points
 				player.setPoints(player.getPoints() + 5);
+
 				System.out.println("5 Points Added (insurance)! New Total ----> " + player.getPoints());
 			}
 
+			// insurance loser
+			if (player.isInsurance() == true) {
+				player.setPoints(player.getPoints() - 5);
+				System.out.println("Dealer Didn't Have BlackJack.");
+				System.out.println("5 Points Deducted (insurance)! New Total ----> " + player.getPoints());
+			}
 			// DOUBLE DOWN
 			if (player.isDoubleDown() == true) {
 				player.setPoints(player.getPoints() - 10);
@@ -572,15 +608,16 @@ public class GameManager {
 			}
 
 		}
+		
 
 	}
 
 	// displays all points
 	public void pointsDisplayer() {
 		// point displayer
-		//title
+		// title
 		System.out.println("--------------- Points Displayer! ---------------");
-		
+
 		for (int i = 0; i < getListOfPlayers().size() - 1; i++) {
 			System.out.println("\nPlayer " + (i + 1) + " Has " + getListOfPlayers().get(i).getPoints() + " Points.");
 		}
@@ -589,7 +626,7 @@ public class GameManager {
 
 	// TODO insurance for players
 	public void setInsurance() {
-		System.out.println("--in insurance method--");
+
 		// loop through the players
 		// ask if they want insurance
 		// scanner y or no
@@ -604,7 +641,8 @@ public class GameManager {
 
 			do {
 				// ask player if they want insurance
-				System.out.println("Does Player " + (i + 1) + " want insurance? (y/n)");
+				System.out.println("Dealer Is Showing Ace!");
+				System.out.println("Does Player " + (i + 1) + " want insurance? (Y)/(N)");
 				response = scanner.nextLine();
 
 				if (response.equals("y") || response.equals("Y")) {
@@ -615,7 +653,7 @@ public class GameManager {
 					validResponse = true;
 				}
 
-			} while (validResponse);
+			} while (!validResponse);
 
 		}
 
