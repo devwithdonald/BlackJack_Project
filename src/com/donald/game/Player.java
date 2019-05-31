@@ -121,7 +121,7 @@ public class Player {
 		// go through cardHand list and add get card total
 		addCardTotal();
 
-		System.out.println("Dealer dealt -> " + anotherCard.getCardFace() + " " + anotherCard.getCardSuit() + " "
+		System.out.println("\nDealer Dealt -> " + anotherCard.getCardFace() + " " + anotherCard.getCardSuit() + " "
 				+ anotherCard.getCardValue());
 
 	}
