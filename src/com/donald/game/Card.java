@@ -8,13 +8,8 @@ public class Card {
 
 	private boolean inPlay = false;
 
-	// list
-	// private final String[] cardFaceList = {"Ace", "Two", "Three", "Four", "Five",
-	// "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
-	// private final String[] cardSuitList = {"Clubs", "Diamonds", "Hearts",
-	// "Spades"};
 
-	// get values later
+	// get card values later
 	public Card() {
 
 	}

@@ -7,20 +7,29 @@ public class Player {
 
 	// player has cardHard list (2 -> can be more)
 
+	private List<Card> cardHand;
+	
 	private boolean dealer = false;
 	private boolean doubleDown = false;
 	private boolean insurance = false;
 	private boolean win = false;
 	private boolean tie = false;
-	private List<Card> cardHand;
+
 	// player has a card SUM
 	private int cardHandTotal;
 	// PLAYER LOSS WIN TO KEEP TRACK
 	private boolean bust = false;
 	private int points;
-
 	
 	// constructor - needs to initialize the cardHand
+	public Player() {
+		cardHand = new ArrayList<>();
+	}
+
+	
+
+	// getter and setters
+
 	public boolean isTie() {
 		return tie;
 	}
@@ -61,11 +70,6 @@ public class Player {
 		this.dealer = dealer;
 	}
 
-	public Player() {
-		cardHand = new ArrayList<>();
-	}
-
-	// getter and setters
 	public int getPoints() {
 		return points;
 	}
@@ -78,7 +82,7 @@ public class Player {
 		return this.cardHandTotal;
 	}
 
-	// add logic here
+	
 	public void setCardHandTotal(int carHandTotal) {
 		this.cardHandTotal = carHandTotal;
 	}
@@ -99,6 +103,7 @@ public class Player {
 		this.bust = bust;
 	}
 
+	
 	// method to add cardTotal
 	public void addCardTotal() {
 		int total = 0;
@@ -141,8 +146,9 @@ public class Player {
 
 	// TODO MAKE CARD SPLIT METHOD
 
-	// TODO MAKE CAR DOUBLE METHOD
+	// TODO MAKE CARD DOUBLE METHOD
 
+	
 	// add card to hand
 	public void addCardToHand(Card card) {
 		this.cardHand.add(card);

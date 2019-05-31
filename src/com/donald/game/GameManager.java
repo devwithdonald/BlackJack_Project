@@ -169,7 +169,7 @@ public class GameManager {
 
 	public void playerDecision() {
 
-		// TODO fix insurance functionality
+		//insurance
 		if (getListOfPlayers().get(getDealerTrackerIndex()).getCardHand().get(0).getCardFace().equals("Ace")) {
 
 
@@ -622,7 +622,7 @@ public class GameManager {
 
 	}
 
-	// TODO insurance for players
+	//  insurance for players
 	public void setInsurance() {
 
 		// loop through the players

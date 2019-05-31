@@ -8,9 +8,9 @@ import java.util.Random;
 //all dealer are players but not all players are not dealers
 public class Dealer extends Player {
 
-	// STATIC SINCE ONLY 1 DEALER?
-	//METHOD
-	//STATIC
+
+	
+	//method
 	public Card dealAnotherCard() {
 
 		Card card = new Card();
@@ -27,14 +27,11 @@ public class Dealer extends Player {
 
 			// changed CardDeck
 			for (int j = 0; j < CardDeck.deck.size(); j++) {
-//			for (int j = 0; j < cardDeck.deck.size(); j++) {
-				// only add if card hand is not in play && if the card object is not already in
-				// there
-				// TODO MIGHT NOT NEED SECOND IF CHECK SINCE ONLY GOING THROUGH IT ONCE?
+
 				if (CardDeck.deck.get(j).getInPlay() == false) {
-//				if (cardDeck.deck.get(j).getInPlay() == false) {
+
 					tempCardHandList.add(CardDeck.deck.get(j));
-//					tempCardHandList.add(cardDeck.deck.get(j));
+
 				}
 			}
 
